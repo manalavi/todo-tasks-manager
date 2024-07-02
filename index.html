@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="script.js"></script>
+    <title>Todo manager</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">Todo manager</h1>
+    <div style="text-align: center; align-items: baseline">
+      <button onclick="openModal()">Create task</button>
+    </div>
+    <!-- Dialog Box - Create Task Start-->
+    <dialog id="createTaskDialogBox">
+      <form method="dialog" id="createtaskform">
+        <div class="modalForm">
+          <label for="title">Title </label>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Enter title"
+          />
+          <label for="priority"
+            >Priority
+            <select name="priority" id="priority">
+              <option selected value="New">New</option>
+              <option value="In progress">In progress</option>
+              <option value="In review">In Review</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </label>
+          <!-- <div> -->
+          <label for="description">Description </label>
+          <textarea name="description" id="description" rows="10"></textarea>
+          <!-- </div> -->
+        </div>
+        <div class="modalActionBtn">
+          <button id="cancel" type="reset" onclick="cancelTaskCreation()">
+            Cancel
+          </button>
+          <button type="submit" onclick="confirmTaskCreation()">Create</button>
+        </div>
+      </form>
+    </dialog>
+    <!-- Dialog Box - Create Task End-->
+
+    <!-- Task Board Start -->
+    <div class="board">
+      <label for="newblock">
+        New
+        <div class="newblock"></div>
+      </label>
+      <label for="inprogressblock"
+        >In progress
+        <div class="inprogressblock"></div
+      ></label>
+      <label for="inreviewblock"
+        >In review
+        <div class="inreviewblock"></div
+      ></label>
+      <label for="completedblock"
+        >Completed
+        <div class="completedblock"></div
+      ></label>
+    </div>
+    <!-- Task Board End -->
+  </body>
+</html>

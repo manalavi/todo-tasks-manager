@@ -1,0 +1,75 @@
+body {
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 450px;
+  height: 300px;
+  margin: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  & > label {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+}
+
+#title {
+  width: 100%;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#description {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+#priority {
+  font-size: 15px;
+}
+
+.modalActionBtn {
+  margin-top: 20px;
+  text-align: end;
+
+  & > button {
+    margin-right: 10px;
+  }
+}
+
+.board {
+  margin-top: 30px;
+  width: 100%;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-style: dotted;
+  border-width: 0.5px;
+  border-top: none;
+
+  & > label {
+    text-align: center;
+    background-color: azure;
+    height: 100%;
+    border-style: dotted;
+    border-width: 0.5px;
+    border-top: none;
+  }
+
+  & > label > div {
+    text-align: center;
+  }
+}
+
+.taskTitle:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
