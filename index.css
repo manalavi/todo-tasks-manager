@@ -3,6 +3,8 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: whitesmoke;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 .modalForm {
@@ -21,10 +23,54 @@ body {
   }
 }
 
+.header {
+  text-align: center;
+}
+
+button {
+  padding: 8px 12px;
+  color: white;
+  background-color: darkseagreen;
+  font-size: medium;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  color: black;
+  border: solid darkseagreen 2px;
+}
+
+input,
+textarea {
+  border-radius: 5px;
+  font-weight: normal;
+}
+
+input,
+textarea,
+button {
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+option:focus {
+  border: solid darkseagreen 3px;
+}
+
+select {
+  width: 150px;
+}
+option {
+  font-size: normal;
+}
+
 #title {
   width: 100%;
-  font-size: 20px;
   margin-bottom: 20px;
+  font-size: 20px;
 }
 
 #description {
@@ -58,7 +104,7 @@ body {
   & > label {
     text-align: center;
     background-color: azure;
-    height: 100%;
+
     border-style: dotted;
     border-width: 0.5px;
     border-top: none;
@@ -66,10 +112,43 @@ body {
 
   & > label > div {
     text-align: center;
+    height: 100%;
   }
+}
+
+.taskTitle {
+  /* font-size: 20px; */
 }
 
 .taskTitle:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.New-task {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: lightcoral;
+}
+
+.Inprogress-task {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: lightskyblue;
+}
+
+.Inreview-task {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: lightpink;
+}
+
+.Completed-task {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: lightgreen;
 }

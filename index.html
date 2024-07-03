@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
     <script src="script.js"></script>
-    <title>Todo manager</title>
+    <title>Todo task manager</title>
   </head>
   <body>
-    <h1 style="text-align: center">Todo manager</h1>
+    <h1 class="header">Todo task manager</h1>
     <div style="text-align: center; align-items: baseline">
       <button onclick="openModal()">Create task</button>
     </div>
@@ -51,19 +51,39 @@
     <div class="board">
       <label for="newblock">
         New
-        <div class="newblock"></div>
+        <div
+          class="newblock"
+          id="newblock"
+          ondrop="dropHandler(event)"
+          ondragover="dropoverHandler(event)"
+        ></div>
       </label>
       <label for="inprogressblock"
         >In progress
-        <div class="inprogressblock"></div
+        <div
+          class="inprogressblock"
+          id="inprogressblock"
+          ondrop="dropHandler(event)"
+          ondragover="dropoverHandler(event)"
+        ></div
       ></label>
       <label for="inreviewblock"
         >In review
-        <div class="inreviewblock"></div
+        <div
+          class="inreviewblock"
+          id="inreviewblock"
+          ondrop="dropHandler(event)"
+          ondragover="dropoverHandler(event)"
+        ></div
       ></label>
       <label for="completedblock"
         >Completed
-        <div class="completedblock"></div
+        <div
+          class="completedblock"
+          id="completedblock"
+          ondrop="dropHandler(event)"
+          ondragover="dropoverHandler(event)"
+        ></div
       ></label>
     </div>
     <!-- Task Board End -->

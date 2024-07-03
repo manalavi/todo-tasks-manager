@@ -36,13 +36,7 @@ function openDialogCheck(dialog) {
 }
 
 function confirmTaskCreation() {
-  const {
-    dialogBox,
-    newBlock,
-    inProgressBlock,
-    inReviewBlock,
-    completedBlock,
-  } = loadVariables();
+  const { dialogBox } = loadVariables();
 
   const formInputs = document.getElementById("createtaskform").elements;
   const title = formInputs["title"].value;
@@ -57,31 +51,37 @@ function confirmTaskCreation() {
     taskBlock = createTaskNode(title, priority, description);
   }
 
-  switch (priority) {
-    case "New":
-      newBlock.insertBefore(taskBlock, newBlock.children[0]);
-      // console.log("New", priority);
-      break;
-    case "In progress":
-      inProgressBlock.insertBefore(taskBlock, inProgressBlock.children[0]);
-      // console.log("progress", priority);
-      break;
-    case "In review":
-      inReviewBlock.insertBefore(taskBlock, inReviewBlock.children[0]);
-      // console.log("review", priority);
-      break;
-    case "Completed":
-      completedBlock.insertBefore(taskBlock, completedBlock.children[0]);
-      // console.log("completed", priority);
-      break;
-    default:
-      break;
-  }
+  setTaskBlockBasedOnPriority(taskBlock, priority);
 
   formInputs["title"].value = "";
   formInputs["priority"].value = "New";
   formInputs["description"].value = "";
   dialogBox.setAttribute("data-id", "");
+}
+
+function setTaskBlockBasedOnPriority(taskBlock, priority) {
+  const { newBlock, inProgressBlock, inReviewBlock, completedBlock } =
+    loadVariables();
+  switch (priority) {
+    case "New":
+      newBlock.insertBefore(taskBlock, newBlock.children[0]);
+      console.log("New", priority);
+      break;
+    case "In progress":
+      inProgressBlock.insertBefore(taskBlock, inProgressBlock.children[0]);
+      console.log("progress", priority);
+      break;
+    case "In review":
+      inReviewBlock.insertBefore(taskBlock, inReviewBlock.children[0]);
+      console.log("review", priority);
+      break;
+    case "Completed":
+      completedBlock.insertBefore(taskBlock, completedBlock.children[0]);
+      console.log("completed", priority);
+      break;
+    default:
+      break;
+  }
 }
 
 function cancelTaskCreation() {
@@ -111,10 +111,8 @@ function createTaskNode(title, priority, description) {
   taskBlock.setAttribute("data-description", description);
   taskBlock.setAttribute("data-priority", priority);
   taskBlock.setAttribute("class", `${priority}-task`);
-  taskBlock.style.cssText = `text-align: center;
-  padding: 20px;
-  margin: 10px;
-  background-color: yellow;`;
+  taskBlock.setAttribute("draggable", true);
+  taskBlock.setAttribute("ondragstart", "dragStartHandler(event)");
 
   taskBlock.setAttribute("id", new Date().getTime());
 
@@ -145,8 +143,58 @@ function updateTaskNode(id, title, priority, description) {
   taskBlock.setAttribute("data-title", title);
   taskBlock.setAttribute("data-priority", priority);
   taskBlock.setAttribute("data-description", description);
+  taskBlock.setAttribute("class", `${priority.replace(/\s/g, "")}-task`);
   taskBlock.childNodes[0].innerText = title;
   taskBlock.childNodes[1].innerText = priority;
 
   return taskBlock;
+}
+
+function dragStartHandler(e) {
+  e.dataTransfer.setData("text/plain", e.target.id);
+  const data = e.dataTransfer.getData("text/plain");
+  console.log(data);
+  e.dataTransfer.effectAllowed = "move";
+}
+
+function dropHandler(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData("text/plain");
+  const taskBlock = document.getElementById(data);
+  const title = taskBlock.getAttribute("data-title");
+  const description = taskBlock.getAttribute("data-description");
+  const id = taskBlock.getAttribute("id");
+  // console.log(taskBlock);
+  let tBlock = null;
+  const priorityBlockId = e.target.id;
+  // console.log(priorityBlockId);
+  switch (priorityBlockId) {
+    case "newblock":
+      tBlock = updateTaskNode(id, title, "New", description);
+      setTaskBlockBasedOnPriority(tBlock, "New");
+      break;
+    case "inprogressblock":
+      console.log("in progress hit");
+      tBlock = updateTaskNode(id, title, "In progress", description);
+      setTaskBlockBasedOnPriority(tBlock, "In progress");
+      break;
+    case "inreviewblock":
+      tBlock = updateTaskNode(id, title, "In review", description);
+      setTaskBlockBasedOnPriority(tBlock, "In review");
+      break;
+    case "completedblock":
+      tBlock = updateTaskNode(id, title, "Completed", description);
+      setTaskBlockBasedOnPriority(tBlock, "Completed");
+      break;
+    default:
+      break;
+  }
+
+  e.target.appendChild(document.getElementById(data));
+}
+
+function dropoverHandler(e) {
+  e.preventDefault();
+
+  e.dataTransfer.dropEffect = "move";
 }
