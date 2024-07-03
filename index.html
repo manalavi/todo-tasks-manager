@@ -14,7 +14,7 @@
     </div>
     <!-- Dialog Box - Create Task Start-->
     <dialog id="createTaskDialogBox">
-      <form method="dialog" id="createtaskform">
+      <form method="dialog" id="createtaskform" autocomplete="off">
         <div class="modalForm">
           <label for="title">Title </label>
           <input
@@ -22,6 +22,7 @@
             name="title"
             type="text"
             placeholder="Enter title"
+            autocomplete="off"
           />
           <label for="priority"
             >Priority
@@ -34,7 +35,12 @@
           </label>
           <!-- <div> -->
           <label for="description">Description </label>
-          <textarea name="description" id="description" rows="10"></textarea>
+          <textarea
+            name="description"
+            id="description"
+            autocomplete="off"
+            rows="10"
+          ></textarea>
           <!-- </div> -->
         </div>
         <div class="modalActionBtn">
